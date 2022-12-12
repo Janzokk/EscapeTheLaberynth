@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 public class doorHandler : MonoBehaviour
 {
+    // Inventary del jugador
     public inventary inv;
     public GameObject uiObject;
     public Text txt;
-    // Start is called before the first frame update
+
+    // Start 
     void Start()
     {
         // Obtenir Inventary
@@ -19,8 +21,10 @@ public class doorHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
+        // Controlar les colisions del jugador amb la porta
         if(col.transform.tag == "Player")
         {
+	    // Si el jugador té dues keys, obrim la porta
             if(inv.key == 2)
             {
                 // Obrir la porta
@@ -29,8 +33,10 @@ public class doorHandler : MonoBehaviour
                 Application.Quit();
             }else
             {
+	        // Si el jugador no té les dues keys, mostra un missatge per tal d'aconseguir-les
                 txt.text = "You need two keys to open this door";
             }
+	    // S'amaga el missatge passats 5 segons
             uiObject.SetActive(true);
             StartCoroutine("WaitForSec");
         }
